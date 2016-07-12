@@ -1,7 +1,9 @@
 - if @resturants.any?
-  - @resturants 2.each do |restaurant|
-    %h2= restaurant.name
+  - @resturants.each do |restaurant|
+    %h2= link_to restaurant.name, restaurant_path(restaurant)
 - else
   %h1 No restaurants yet
 
-%a(href='#') Add a restaurant
+
+
+%a(href='restaurants/new') Add a restaurant

@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'haml'
   gem 'devise'
+  gem 'omniauth-facebook'
 end
 
 group :development do

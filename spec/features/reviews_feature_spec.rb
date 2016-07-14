@@ -23,13 +23,14 @@ feature 'reviewing' do
   end
 
   scenario 'reviews are shown on the homepage' do
+    review('KFC','so so', '3')
+    expect(page).to have_content('so so')
+  end
 
-     visit '/restaurants'
-     click_link 'Review KFC'
-     fill_in "Thoughts", with: "so so"
-     select '3', from: 'Rating'
-     click_button 'Leave Review'
-     expect(page).to have_content('so so')
+  scenario 'does not allow users to review the same restaurant twice' do
+    review('KFC','so so', '3')
+    review('KFC','so so', '3')
+    expect(page).to have_content('You have already reviewed this restaurant')
   end
 
 

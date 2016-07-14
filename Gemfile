@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'haml'
   gem 'shoulda-matchers'
+  gem 'railroady' #https://github.com/preston/railroady -> run rake diagram:all
 end
 
 group :development do

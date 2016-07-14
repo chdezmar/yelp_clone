@@ -27,3 +27,11 @@ def sign_out
 	visit '/'
 	click_link 'Sign out'
 end
+
+def review(name, content, rating)
+	visit '/restaurants'
+	click_link 'Review ' + name
+	fill_in "Thoughts", with: content
+	select rating, from: 'Rating'
+	click_button 'Leave Review'
+end

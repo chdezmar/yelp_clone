@@ -33,6 +33,23 @@ feature 'reviewing' do
     expect(page).to have_content('You have already reviewed this restaurant')
   end
 
+  xscenario 'users can delete only their own reviews' do
+    visit '/'
+    review('KFC','so so', '3')
+    click_link 'Sign out'
+    user_sign_up("user2@user.com","password","password")
+    expect(page).not_to have_link 'Delete Review'
+  end
+
+
+
+  scenario 'displays an average rating for all reviews' do
+    review('KFC','So so', '3')
+    sign_out
+    user_sign_up('test1@gmail.com','lolololol','lolololol')
+    review('KFC','Great', '5')
+    expect(page).to have_content('Average rating: 4')
+  end
 
 
 end

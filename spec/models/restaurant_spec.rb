@@ -10,4 +10,26 @@ describe Restaurant, type: :model do
 
   it { should validate_uniqueness_of(:name) }
 
+  context '1 review' do
+    it 'returns that rating' do
+      User.create!(id: 1, email: 'lol@gmail.com', password: 'lololol')
+      restaurant = Restaurant.create!(name: 'The Ivy', user_id: 1)
+      restaurant.reviews.create!(rating: 4, user_id: 1)
+      expect(restaurant.average_rating).to eq 4
+    end
+  end
+
+  context 'multiple reviews' do
+    it 'returns the average' do
+      User.create!(id: 1, email: 'lol@gmail.com', password: 'lololol')
+      User.create!(id: 2, email: 'lolol@gmail.com', password: 'lololol')
+      User.create!(id: 3, email: 'lololol@gmail.com', password: 'lololol')
+      restaurant = Restaurant.create!(name: 'The Ivy', user_id: 1)
+      restaurant.reviews.create!(rating: 1, user_id: 3)
+      restaurant.reviews.create!(rating: 5, user_id: 2)
+      expect(restaurant.average_rating).to eq 3
+    end
+  end
+
+
 end

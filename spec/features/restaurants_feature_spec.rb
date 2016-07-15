@@ -49,7 +49,6 @@ feature 'Restaurants' do
         click_link 'Sign out'
         user_sign_up("user2@user.com","password","password")
         expect(page).not_to have_link 'Edit KFC'
-        expect(page).not_to have_link 'Delete KFC'
       end
 
       # before {Restaurant.create name: 'KFC', description: 'Deep fried goodness'}
@@ -74,6 +73,15 @@ feature 'Restaurants' do
         expect(page).not_to have_content('KFC')
         expect(page).to have_content('Restaurant deleted successfully')
       end
+
+      scenario 'user cannot delete a restaurant that they did not create' do
+        visit '/'
+        add_restaurant
+        click_link 'Sign out'
+        user_sign_up("user2@user.com","password","password")
+        expect(page).not_to have_link 'Delete KFC'
+      end
+
     end
   end
 
@@ -100,6 +108,12 @@ feature 'Restaurants' do
     end
   end
 
-
-
+  describe '#average_rating' do
+    context 'no reviews' do
+      it 'returns "N/A" when there are no reviews' do
+        restaurant = Restaurant.create(name: 'The Ivy')
+        expect(restaurant.average_rating).to eq 'N/A'
+      end
+    end
+  end
 end

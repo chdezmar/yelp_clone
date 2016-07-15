@@ -48,7 +48,7 @@ feature 'reviewing' do
     sign_out
     user_sign_up('test1@gmail.com','lolololol','lolololol')
     review('KFC','Great', '5')
-    expect(page).to have_content('Average rating: 4')
+    expect(page).to have_content('Average rating: ★★★★☆')
   end
 
 
